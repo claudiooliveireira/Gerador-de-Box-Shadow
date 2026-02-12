@@ -12,7 +12,7 @@ class BoxShadowGenerator {
         spreadRef,
         previewBox,
         rule,
-        webRule,
+        webkitRule,
         mozRule
     ) { /* onde recebe os argumentos e os atribui a cada propriedade da classe */
         this.horizontal = horizontal
@@ -25,10 +25,75 @@ class BoxShadowGenerator {
         this.spreadRef = spreadRef
         this.previewBox =previewBox
         this.rule =rule
-        this.webRule =webRule
+        this.webkitRule =webkitRule
         this.mozRule =mozRule
     }
 
+    /* função de inicilização, valores dentro do bloco */
+    initialize() {
+
+        this.horizontalRef.value =  this.horizontal.value;
+        this.verticalRef.value =  this.vertical.value;
+        this.blurRef.value =  this.blur.value;
+        this.spreadRef.value =  this.spread.value;
+
+
+        this.applyRule();
+        this.showRule(); // vai exibir a regra do code no html
+    }
+
+    /* função para aplicar a regra code (regra inicial da shadow) */
+    applyRule() {
+
+        this.previewBox.style.boxShadow = ` 
+        ${this.horizontalRef.value}px
+        ${this.verticalRef.value}px 
+        ${this.blurRef.value}px 
+        ${this.spreadRef.value}px 
+        #000000 
+        `
+        /* mostra a regra em code */
+        this.currentRule = this.previewBox.style.boxShadow;
+    }
+    /* exibir a regra code no html */
+    showRule() {
+        this.rule.innerText = this.currentRule;
+        this.webkitRule.innerText = this.currentRule;
+        this.mozRule.innerText = this.currentRule;
+    }
+
+
+    /* função updateValue */
+    updateValue(type, value) {
+
+        switch(type) {
+            case "horizontal": // se o switch type for igual (case) a "horizontal"
+                this.horizontalRef.value = value; // muda com base no valor da referencia
+                break
+
+            case "vertical":
+                this.verticalRef.value = value;
+                break
+
+            case "blur":
+                this.blurRef.value = value;
+                break
+
+            case "spread":
+                this.spreadRef.value = value
+                break
+
+        }
+
+
+
+
+
+
+        // refrete o value (efeito)  na boxShadow
+        this.applyRule();
+        this.showRule();
+    }
        
 }
 
@@ -70,10 +135,51 @@ const boxShadow = new BoxShadowGenerator(
     mozRule
 )
 
-console.log(boxShadow)
+
+
+/* inicializando o boxShadow initialize() volores dentro do bloco */
+boxShadow.initialize();
 
 
 /* Eventos */ 
+
+// evento horizontal
+horizontal.addEventListener("input", (e) => {
+    const value = e.target.value;
+
+    boxShadow.updateValue("horizontal", value);
+});
+
+// evento vertical
+vertical.addEventListener("input", (e) => {
+    const value = e.target.value;
+    
+    boxShadow.updateValue("vertical", value);
+});
+
+// evento de blur borrão 
+blur.addEventListener("input", (e) => {
+    const value = e.target.value;
+    
+    boxShadow.updateValue("blur", value);
+});
+
+// evento de spread espalhamento 
+spread.addEventListener("input", (e) => {
+    const value = e.target.value;
+    
+    boxShadow.updateValue("spread", value);
+});
+
+
+
+
+
+
+
+
+
+
 
 
 
