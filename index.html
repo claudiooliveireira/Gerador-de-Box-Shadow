@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Box Shadow</title>
-    <link rel="shortcut icon" href="generator-icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="sombra-icon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" defer></script>
 </head>
 <body>
+    <h1>Gerador de Box Shadow</h1>
     <div id="box-shadow-generator">
         <!-- Box shadow Control -->
         <div id="controls-container">
@@ -73,6 +74,48 @@
                     <p>px</p>
                 </div>
             </div>
+           
+            <!-- opacidade -->
+             <div class="form-control">
+                <div class="range-input">
+                    <label for="opacity">Opacidade :</label>
+                    <input type="range"
+                     id="opacity"
+                    name="opacity" 
+                    min="0" 
+                    max="1" 
+                    value="1"
+                    step="0.01">
+                </div>
+                <div class="reference-input">
+                    <input type="text" id="opacity-value" name="opacity-value" >
+                    <p>px</p>
+                </div>
+            </div>
+
+             <!-- cor da sombra -->
+            <div class="form-control">
+                <div class="range-input">
+                    <label for="spread">Cor da Sombra:</label>
+                    <input 
+                    type="color"
+                     id="color"
+                    name="color" 
+                    value="#000000">
+                </div>
+                <div class="reference-input">
+                    <input type="text" id="color-value" name="color-value" >
+                   
+                </div>
+            </div>
+            <!-- sombra interna -->
+            <div class="form-control">
+                <div class="range-input">
+                    <label for="opacity">Sombra interna? ( Inset ) :</label>
+                    <input type="checkbox" name="inset" id="inset">
+                </div>
+                
+            </div>
         </div>
 
         <!-- Box Shadow Preview -->
@@ -90,6 +133,7 @@
             <p id="webkit-rule">-webkit-box-shadow: <span></span> ;</p>
             <p id="moz-rule">-moz-box-shadow: <span></span> ;</p>
         </div>
+        <p id="copy-instructions">Clique no quadro acima para copiar as regras ( CSS )</p>
     </div>
 </body>
 </html>
