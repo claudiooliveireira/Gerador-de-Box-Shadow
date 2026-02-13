@@ -20,24 +20,25 @@ class BoxShadowGenerator {
         webkitRule,
         mozRule
     ) { /* onde recebe os argumentos e os atribui a cada propriedade da classe */
-        this.horizontal = horizontal
-        this.horizontalRef = horizontalRef
-        this.vertical = vertical
-        this.verticalRef = verticalRef 
-        this.blur = blur
-        this.blurRef = blurRef
-        this.spread =spread
-        this.spreadRef = spreadRef
-        this.color = color
-        this.colorRef = colorRef
+        this.horizontal = horizontal;
+        this.horizontalRef = horizontalRef;
+        this.vertical = vertical;
+        this.verticalRef = verticalRef ;
+        this.blur = blur;
+        this.blurRef = blurRef;
+        this.spread =spread;
+        this.spreadRef = spreadRef;
+        this.color = color;
+        this.colorRef = colorRef;
         this.opacity = opacity
-        this.opacityRef = opacityRef
-        this.inset = inset
-        this.previewBox =previewBox
-        this.rule =rule
-        this.webkitRule =webkitRule
-        this.mozRule =mozRule
-    }
+        this.opacityRef = opacityRef;
+        this.inset = inset;
+        this.insetRef = inset.checked;
+        this.previewBox =previewBox;
+        this.rule =rule;
+        this.webkitRule =webkitRule;
+        this.mozRule =mozRule;
+    };
 
     /* função de inicilização, valores dentro do bloco */
     initialize() {
@@ -61,7 +62,7 @@ class BoxShadowGenerator {
         const rgbValue = this.hexToRgb(this.colorRef.value); //transformar o color hexademimal(#00000) em  Rgba
 
 
-        const shadowRule = ` 
+        const shadowRule = ` ${this.insetRef ? "inset" : ""} 
         ${this.horizontalRef.value}px
         ${this.verticalRef.value}px 
         ${this.blurRef.value}px 
@@ -111,6 +112,9 @@ class BoxShadowGenerator {
                 this.opacityRef.value = value;
                 break
 
+            case "inset":
+                this.insetRef = value;
+                break
         }
 
 
@@ -233,8 +237,13 @@ opacity.addEventListener("input", (e) => {
     boxShadow.updateValue("opacity", value);
 });
 
+// evento de combra interna (inset)
 
-
+inset.addEventListener("input", (e) => {
+    const value = e.target.checked;
+    
+    boxShadow.updateValue("inset", value);
+});
 
 
 
