@@ -47,6 +47,7 @@ class BoxShadowGenerator {
         this.blurRef.value =  this.blur.value;
         this.spreadRef.value =  this.spread.value;
         this.colorRef.value =  this.color.value;
+        this.opacityRef.value = this.opacity.value;
 
 
 
@@ -65,7 +66,7 @@ class BoxShadowGenerator {
         ${this.verticalRef.value}px 
         ${this.blurRef.value}px 
         ${this.spreadRef.value}px 
-        rgba(${rgbValue})
+        rgba(${rgbValue}, ${this.opacityRef.value})
         `
 
         this.previewBox.style.boxShadow = shadowRule;
@@ -106,6 +107,10 @@ class BoxShadowGenerator {
                 this.colorRef.value = value;
                 break
 
+            case "opacity":
+                this.opacityRef.value = value;
+                break
+
         }
 
 
@@ -143,7 +148,7 @@ const color = document.querySelector("#color") /* cor */
 const colorRef = document.querySelector("#color-value")
 
 const opacity = document.querySelector("#opacity") /* opacidade */
-const opacityRef = document.querySelector("#opacity-velue")
+const opacityRef = document.querySelector("#opacity-value")
 
 const inset = document.querySelector("#inset") /* sombra interna */
 
@@ -213,10 +218,19 @@ spread.addEventListener("input", (e) => {
     boxShadow.updateValue("spread", value);
 });
 
+
+// evento de trocar a cor da shadow
 color.addEventListener("input", (e) => {
     const value = e.target.value;
     
     boxShadow.updateValue("color", value);
+});
+
+// evento de opacidade 
+opacity.addEventListener("input", (e) => {
+    const value = e.target.value;
+    
+    boxShadow.updateValue("opacity", value);
 });
 
 
