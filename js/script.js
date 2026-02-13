@@ -56,19 +56,13 @@ class BoxShadowGenerator {
         this.showRule(); // vai exibir a regra do code no html
     }
 
-    /* função para aplicar a regra code (regra inicial da shadow) */
+    /* função para aplicar e (mostrar) a regra code (regra inicial da shadow) */
     applyRule() {
 
         const rgbValue = this.hexToRgb(this.colorRef.value); //transformar o color hexademimal(#00000) em  Rgba
 
 
-        const shadowRule = ` ${this.insetRef ? "inset" : ""} 
-        ${this.horizontalRef.value}px
-        ${this.verticalRef.value}px 
-        ${this.blurRef.value}px 
-        ${this.spreadRef.value}px 
-        rgba(${rgbValue}, ${this.opacityRef.value})
-        `
+        const shadowRule = ` ${this.insetRef ? "inset" : ""} ${this.horizontalRef.value}px ${this.verticalRef.value}px ${this.blurRef.value}px ${this.spreadRef.value}px rgba(${rgbValue}, ${this.opacityRef.value}) `
 
         this.previewBox.style.boxShadow = shadowRule;
 
@@ -246,13 +240,29 @@ inset.addEventListener("input", (e) => {
 });
 
 
+/* copiar regra css */
+
+const rulesArea = document.querySelector("#rules-area");
+
+const copyInstructions = document.querySelector("#copy-instructions")// para muda o text quando cópia
+
+rulesArea.addEventListener("click", () => {
+
+    const rules = rulesArea.innerText.replace(/^\s*\n/gm, "");
+    /* replace(/^\s*\n/gm, "") vai indentificar as quebrar de linha(espaço em branco) e trocar (eliminar ela), para pode juntar elas */
+
+    navigator.clipboard.writeText(rules).then(() => {
+         copyInstructions.innerText = "CSS copiado com sucesso!"
 
 
+        setTimeout(() => {
+            copyInstructions.innerText = "Clique no quadro acima para copiar as regras ( CSS )"
 
+        }, 2000)
 
+    })
 
-
-
+})
 
 
 
